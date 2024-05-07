@@ -1,6 +1,6 @@
 from cgi import FieldStorage
 from datetime import datetime
-from handler_helper import DBTables, get_name_from_gst
+from .handler_helper import DBTables, get_name_from_gst
 
 TABLE_NAME = DBTables.PRIMARY_SALES.name
 

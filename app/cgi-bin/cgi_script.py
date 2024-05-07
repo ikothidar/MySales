@@ -1,8 +1,6 @@
 #!c:/Users/6129158/Envs/personal/Scripts/python.exe
 
-print("Content-type:text/html")
-print()
-print()
+print("Content-type:text/html\n\n")
 
 import cgi, cgitb
 

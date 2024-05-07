@@ -17,7 +17,8 @@ class SQLite:
         query: Optional[str] = None, 
         columns: Optional[List] = None, 
         condition: Optional[str] = None,
-        order: Optional[str] = 'ASC',
+        order_by: Optional[str] = None,
+        limit: Optional[int] = 1,
     ) -> List:
         """
         Execute given query or from passed parametes.
@@ -48,13 +49,19 @@ class SQLite:
             if condition:
                 query += condition
 
-            query += f'ORDER BY {order} '
-
-        print(f'\nQuery to execute: {query}\n')
+            if order_by:
+                query += f' ORDER BY {order_by} '
         try:
+            query = query.strip()
+            
+            print(f'\nQuery to execute: [{query}]\n')
             result = self._db.execute(query)
 
+            if limit == 1:
+                return result.fetchone()
+
             return result.fetchall()
+
         except Exception as ex:
             print(f'\nException occurred: {ex}\n')
 

@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Optional
-from config_helper import SQLite
+from .config_helper import SQLite
 
 DATABASE_FILENAME = (
     r"C:/Users/6129158/Projects/PA/Nareshanjali Enterprises/MySales/data/MySales.db"
@@ -35,11 +35,14 @@ def get_name_from_gst(
     """
     db = SQLite(filename=DATABASE_FILENAME, table=table_name)
 
-    condition = f"WHERE GST_NUMBER = {gst_number}"
+    condition = f"WHERE GST_NUMBER = '{gst_number}'"
     
     if hsn_code:
-        condition += f"{condition} AND HSN_CODE = {hsn_code}"
+        condition += f"{condition} AND HSN_CODE = '{hsn_code}'"
 
-    result = db.get_data(columns=['NAME'], condition=condition)
+    result = list(db.get_data(columns=['NAME'], condition=condition))
 
+    if not result:
+        return None
+    
     return result[0]
