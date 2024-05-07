@@ -1,6 +1,74 @@
-html, body { height: 100%; padding: 0; margin: 0; }
-button { width: 50%; height: 50%; float: left; }
-#top_left { background: #DDD; }
-#top_right { background: #AAA; }
-#bottom_left { background: #777; }
-#bottom_right { background: #444; }
+html, body { 
+    height: 100%; 
+    padding: 0; 
+    margin: 0; 
+    font: 1em sans-serif;
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(212, 207, 201);
+}
+
+div { width: 50%; height: 90%; float: left; }
+
+#fetch-data { background: #a8d0e6; }
+#primary-sales { background: #f76c6c; }
+#secondary-sales { background: #24305e; }
+
+#home-nav {
+    color: #000;
+    text-decoration: none;
+    align-items: center;
+}
+
+.card-trip {
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    position: relative; /* NEEDED FOR THE LINK */
+    width: calc(100% / 3)
+}
+
+.card-trip>img {
+    height: 70%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-trip h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card-trip p {
+    font-size: 12px;
+    opacity: .7;
+    margin: 0;
+}
+
+.card-trip .card-trip-infos {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+}
+
+.card-trip-infos {
+    position: absolute;
+    right: 16px;
+    top: -20px;
+    width: 100%;
+}
+
+/* To stretch the link on top of the card div */
+.card-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

@@ -9,17 +9,23 @@
 
     <link rel="stylesheet" href="../css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-    
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
+    <div class="header">
+        <header>
+            <a href="/html" id='home-nav'>Dashboard</a>
+        </header>
+    </div>
+
     <div class="container">
-        <form action="../cgi-bin/cgi_script.py", method="post">
+        <form action="../cgi-bin/cgi_script.py" , method="post">
             <h2>Secondary Sales Form</h2>
             <input type="hidden" name="form_id" value="secondary">
-            
+
             <label for="toggle_button">GST Number (Yes/No):</label>
             <label class="switch">
                 <input id="toggle_button" type="checkbox" checked>
