@@ -4,6 +4,7 @@ from sqlite3 import Error
 
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
+from config.utils import DATABASE_FILENAME
 
 
 def month_string_to_number(month_string):
@@ -117,10 +118,10 @@ def change_width(sheet):
     sheet.column_dimensions['B'].width = 30
 
 
-def create_workbook(month, year, sale_type, db_path):
+def create_workbook(month, year, sale_type, DATABASE_FILENAME):
     mywb = Workbook()
 
-    con = connect_db(db_path)
+    con = connect_db(DATABASE_FILENAME)
     cur = con.cursor()
 
     if sale_type == 'both':
@@ -174,12 +175,12 @@ def create_workbook(month, year, sale_type, db_path):
         mywb.close()
 
 
-def get_record(db_path, sale_type):
+def get_record(DATABASE_FILENAME, sale_type):
     print('Fetching records from DB...')
     month = input("Enter Full Month Name => ")
     year = input("Enter Year in 'YYYY' format => ")
 
-    create_workbook(month, year, sale_type, db_path)
+    create_workbook(month, year, sale_type, DATABASE_FILENAME)
 
 
 def insert_record(conn, sql, file_name):
@@ -190,9 +191,9 @@ def insert_record(conn, sql, file_name):
         conn.commit()
 
 
-def put_record(db_path, sale_type):
+def put_record(DATABASE_FILENAME, sale_type):
     print("Inserting records in DB...")
-    conn = connect_db(db_path)
+    conn = connect_db(DATABASE_FILENAME)
     sql_primary = ''' INSERT INTO primarysales (ENTRY_DATE, NAME_PARTY, GST, INVOICE, DATE, DETAIL_GOODS, HSN_CODE, 
     TOTAL_AMOUNT, TAXABLE_BEFORE_GST, IGST_12per, IGST_5per, CGST, SGST) 
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) '''
@@ -212,7 +213,6 @@ def put_record(db_path, sale_type):
 
 
 def main():
-    db_path = r'MySales.db'
     sale_type = {1: 'primary', 2: 'secondary', 3: 'both'}
 
     print("1. Insert new record")
@@ -226,12 +226,12 @@ def main():
     sale_opt = int(input("Select from above options 1, 2, 3 => "))
 
     if opt == 1:
-        put_record(db_path, sale_type[sale_opt])
+        put_record(DATABASE_FILENAME, sale_type[sale_opt])
     elif opt == 2:
-        get_record(db_path, sale_type[sale_opt])
+        get_record(DATABASE_FILENAME, sale_type[sale_opt])
     elif opt == 3:
-        put_record(db_path, sale_type[sale_opt])
-        get_record(db_path, sale_type[sale_opt])
+        put_record(DATABASE_FILENAME, sale_type[sale_opt])
+        get_record(DATABASE_FILENAME, sale_type[sale_opt])
     else:
         print("You pressed wrong options please select from options 1, 2, 3")
 

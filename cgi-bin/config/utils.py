@@ -3,7 +3,7 @@ from typing import Optional
 from .config_helper import SQLite
 
 DATABASE_FILENAME = (
-    r"C:/Users/6129158/Projects/PA/Nareshanjali Enterprises/MySales/data/MySales.db"
+    r"C:/Users/6129158/Projects/PA/Nareshanjali Enterprises/MySales/data/databases/MySales.db"
 )
 SALE_TYPE = ['Primary', 'Secondary']
 
