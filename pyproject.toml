@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "mysales"
+version = "1.0"
+description = "Insert Primary and Secondary sales data and also fetch sales data month wise."
+authors = ["IshaanK <kothidarishaan11@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
