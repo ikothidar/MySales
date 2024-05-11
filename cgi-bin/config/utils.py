@@ -3,14 +3,76 @@ from typing import Optional
 from .config_helper import SQLite
 
 DATABASE_FILENAME = (
-    r"C:/Users/6129158/Projects/PA/Nareshanjali Enterprises/MySales/data/databases/MySales.db"
+    r"C:/Users/6129158/Projects/PA/MySales/data/databases/MySales.db"
 )
+
+TARGET_LOCATION = r"C:/Users/6129158/Projects/PA/MySales/data/files/"
+
 SALE_TYPE = ['Primary', 'Secondary']
+
+VALID_MONTHS = {
+    'jan': '01', 
+    'feb': '02', 
+    'mar': '03', 
+    'apr': '04', 
+    'may': '05', 
+    'jun': '06', 
+    'jul': '07', 
+    'aug': '08', 
+    'sep': '09', 
+    'oct': '10', 
+    'nov': '11', 
+    'dec': '12',
+}
+
+PRIMARY_SALES_HEADER = (
+    'Date', 
+    'Name of the party', 
+    'GST no of party', 
+    'Invoice No', 
+    'Date', 
+    'Details of Goods', 
+    'HSN code',
+    'Total amount of bill', 
+    'Taxable amount before GST', 
+    'IGST @12%', 
+    'IGST @5%', 
+    'CGST @6% and 2.5%',
+    'SGST @6% and 2.5%',
+)
+
+SECONDARY_SALES_HEADER= (
+    'Date', 
+    'Name of the party', 
+    'GST no of party', 
+    'Invoice No', 
+    'Date', 
+    'Details of Goods',
+    'Total Amount of Bill', 
+    'Taxable Value @12% Ayurvedic Medicine',
+    'Taxable Value @12% Compression Germents', 
+    'Taxable Value @5% Abd.Belts', 
+    'CGST', 
+    'SGST',
+    'Total GST',
+)
 
 class DBTables(Enum):
     PRIMARY_SALES = 'primary'
     SECONDARY_SALES = 'secondary'
     GST_DETAILS = 'gst'
+
+
+class FormTypes(Enum):
+    PRIMARY_SALES = 'primary'
+    SECONDARY_SALES = 'secondary'
+    FETCH_DATA = 'fetch'
+
+
+class FetchTypes(Enum):
+    PRIMARY_SALES = 'primary'
+    SECONDARY_SALES = 'secondary'
+    BOTH_SALES = 'both_sales'
 
 
 def get_name_from_gst(
@@ -40,7 +102,9 @@ def get_name_from_gst(
     if hsn_code:
         condition += f"{condition} AND HSN_CODE = '{hsn_code}'"
 
-    result = list(db.get_data(columns=['NAME'], condition=condition))
+    result = list(
+        db.get_data(columns=['NAME'], condition=condition, limit=1)
+    )
 
     if not result:
         return None

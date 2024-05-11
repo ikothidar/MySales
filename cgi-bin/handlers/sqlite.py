@@ -18,7 +18,7 @@ class SQLite:
         columns: Optional[List] = None, 
         condition: Optional[str] = None,
         order_by: Optional[str] = None,
-        limit: Optional[int] = 1,
+        limit: Optional[int] = None,
     ) -> List:
         """
         Execute given query or from passed parametes.

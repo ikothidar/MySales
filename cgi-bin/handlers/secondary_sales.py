@@ -1,3 +1,5 @@
+from typing import Optional
+
 from cgi import FieldStorage
 from datetime import datetime
 from .handler_helper import DBTables, get_name_from_gst
@@ -6,7 +8,10 @@ TABLE_NAME = DBTables.SECONDARY_SALES.name
 
 class SecondarySales:
 
-    def __init__(self, form: FieldStorage):
+    def __init__(
+            self, 
+            form: Optional[FieldStorage] = None,
+        ) -> None:
         self._form = form
 
     def generate_query(self, data: dict) -> dict:
@@ -33,6 +38,9 @@ class SecondarySales:
     
     def main(self):
         data = dict()
+
+        if not self._form:
+            return {'error': 'Some error occured while collecting form data'}
 
         # Getting data from form object
         data['gst_number'] = self._form.getfirst('gst_number')
