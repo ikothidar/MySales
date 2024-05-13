@@ -2,6 +2,7 @@ import sqlite3
 
 from typing import List, Optional
 
+
 class SQLite:
     """
     Class to do databse transactions.
@@ -30,8 +31,10 @@ class SQLite:
                 List of columns to fetch.
             condition (Optional[str], optional): Defaults to None.
                 any condition to filter out data.
-            order (Optional[str], optional): Defaults to 'ASC'.
-                order of the result data.
+            order_by (Optional[str], optional): Defaults to None.
+                column list to order the result data.
+            limit (Optional[int], optional): Defaults to None,
+                Limit to fetch data.
 
         Returns:
             List: query result in list format.

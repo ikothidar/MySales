@@ -1,7 +1,8 @@
 from cgi import FieldStorage
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
-from config.utils import (
+
+from source.config.utils import (
     DATABASE_FILENAME,
     DBTables,
     FetchTypes,
@@ -10,13 +11,14 @@ from config.utils import (
     TARGET_LOCATION,
     VALID_MONTHS,
 )
-from .handler_helper import SQLite
+from sqlite import SQLite
 
 
 class FetchData:
     """
     Class to Fetch data and create report.
     """
+
     def __init__(self, form: FieldStorage) -> None:
         self._form = form
 
@@ -66,8 +68,6 @@ class FetchData:
 
         sheet.column_dimensions['B'].width = 30
 
-
-
     def primary_sale(self, sheet, month, year):
         sheet['D1'] = '"Details of Purchase During the Month of {0} {1}"'.format(month, year)
         sheet['D1'].font = Font(color="00B050", bold=True, size=18)
@@ -78,7 +78,7 @@ class FetchData:
         sheet.append(PRIMARY_SALES_HEADER)
 
         db = SQLite(filename=DATABASE_FILENAME, table=DBTables.PRIMARY_SALES.name)
-        
+
         rows = db.get_data(
             condition=(
                 f"WHERE strftime('%m', invoice_date) = {str(VALID_MONTHS[month]).zfill(2)}"
@@ -91,7 +91,6 @@ class FetchData:
             sheet.append(row[1:])
             FetchData.style_data(sheet[sheet.max_row])
 
-
     def secondary_sale(self, sheet, month, year):
         sheet['D1'] = '"Details of Sales During the Month of {0} {1}"'.format(month, year)
         sheet['D1'].font = Font(color="00B050", bold=True, size=18)
@@ -102,7 +101,7 @@ class FetchData:
         sheet.append(SECONDARY_SALES_HEADER)
 
         db = SQLite(filename=DATABASE_FILENAME, table=DBTables.SECONDARY_SALES.name)
-        
+
         rows = db.get_data(
             condition=(
                 f"WHERE strftime('%m', invoice_date) = {str(VALID_MONTHS[month]).zfill(2)}"
@@ -168,7 +167,6 @@ class FetchData:
             print('Some error occured please try again...')
 
             mywb.close()
-
 
     def main(self):
         sale_type = self._form.getfirst('sale_type')

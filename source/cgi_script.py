@@ -1,15 +1,15 @@
 #!c:/Users/6129158/Envs/personal/Scripts/python.exe
 
-print("Content-type:text/html\n\n")
-
-import cgi, cgitb
+import cgi
+import cgitb
 
 from config.utils import DATABASE_FILENAME, DBTables, FormTypes
+from handlers.fetch_data import FetchData
 from handlers.primary_sales import PrimarySales
 from handlers.secondary_sales import SecondarySales
-from handlers.fetch_data import FetchData
 from handlers.sqlite import SQLite
 
+print("Content-type:text/html\n\n")
 cgitb.enable(display=0, logdir="./logs")
 
 
@@ -25,8 +25,8 @@ def main():
     elif form_id == FormTypes.SECONDARY_SALES.value:
         data_object = SecondarySales(form=form)
         table_name = DBTables.SECONDARY_SALES.name
-    elif form_id == FormTypes.FETCH_DATA.value:
-        data_object = FetchData(form=form)
+    elif form_id == FormTypes.FETCH_REPORT.value:
+        FetchData(form=form)
         return None
     else:
         print('404 Page Not Found')

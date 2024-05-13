@@ -1,6 +1,5 @@
 from enum import Enum
 from typing import Optional
-from .config_helper import SQLite
 
 DATABASE_FILENAME = (
     r"C:/Users/6129158/Projects/PA/MySales/data/databases/MySales.db"
@@ -57,6 +56,7 @@ SECONDARY_SALES_HEADER= (
     'Total GST',
 )
 
+
 class DBTables(Enum):
     PRIMARY_SALES = 'primary'
     SECONDARY_SALES = 'secondary'
@@ -66,7 +66,7 @@ class DBTables(Enum):
 class FormTypes(Enum):
     PRIMARY_SALES = 'primary'
     SECONDARY_SALES = 'secondary'
-    FETCH_DATA = 'fetch'
+    FETCH_REPORT = 'fetch'
 
 
 class FetchTypes(Enum):
