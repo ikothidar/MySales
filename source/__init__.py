@@ -3,8 +3,6 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from config.utils import (
-    DBTables,
-    get_name_from_gst,
-)
+print(sys.path)
+
 from handlers.sqlite import SQLite

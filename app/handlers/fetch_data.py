@@ -2,7 +2,7 @@ from cgi import FieldStorage
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 
-from source.config.utils import (
+from app.config import (
     DATABASE_FILENAME,
     DBTables,
     FetchTypes,
@@ -68,6 +68,7 @@ class FetchData:
 
         sheet.column_dimensions['B'].width = 30
 
+    @staticmethod
     def primary_sale(self, sheet, month, year):
         sheet['D1'] = '"Details of Purchase During the Month of {0} {1}"'.format(month, year)
         sheet['D1'].font = Font(color="00B050", bold=True, size=18)
@@ -91,7 +92,8 @@ class FetchData:
             sheet.append(row[1:])
             FetchData.style_data(sheet[sheet.max_row])
 
-    def secondary_sale(self, sheet, month, year):
+    @staticmethod
+    def secondary_sale(sheet, month, year):
         sheet['D1'] = '"Details of Sales During the Month of {0} {1}"'.format(month, year)
         sheet['D1'].font = Font(color="00B050", bold=True, size=18)
         sheet.merge_cells('D1:J1')
@@ -114,21 +116,22 @@ class FetchData:
             sheet.append(row[1:])
             FetchData.style_data(sheet[sheet.max_row])
 
-    def create_workbook(self, month, year, sale_type):
+    @staticmethod
+    def create_workbook(month, year, sale_type):
         mywb = Workbook()
 
         if sale_type == FetchTypes.BOTH_SALES.value:
             sheet = mywb.active
             sheet.title = FetchTypes.PRIMARY_SALES.name
 
-            self.primary_sale(sheet, month, year)
+            FetchData.primary_sale(sheet, month, year)
             FetchData.sum_amount(sheet, 8)
             FetchData.change_width(sheet)
             FetchData.style_header(sheet[3])
 
             sheet = mywb.create_sheet('Secondary')
 
-            self.secondary_sale(sheet, month, year)
+            FetchData.secondary_sale(sheet, month, year)
             FetchData.sum_amount(sheet, 7)
             FetchData.change_width(sheet)
             FetchData.style_header(sheet[3])
@@ -142,7 +145,7 @@ class FetchData:
             sheet = mywb.active
             sheet.title = FetchTypes.PRIMARY_SALES.name
 
-            self.primary_sale(sheet, month, year)
+            FetchData.primary_sale(sheet, month, year)
             FetchData.sum_amount(sheet, 8)
             FetchData.change_width(sheet)
             FetchData.style_header(sheet[3])
@@ -155,7 +158,7 @@ class FetchData:
             sheet = mywb.active
             sheet.title = FetchTypes.SECONDARY_SALES.name
 
-            self.secondary_sale(sheet, month, year)
+            FetchData.secondary_sale(sheet, month, year)
             FetchData.sum_amount(sheet, 7)
             FetchData.change_width(sheet)
             FetchData.style_header(sheet[3])
@@ -164,7 +167,7 @@ class FetchData:
                 f'{TARGET_LOCATION}{month}_{year}_Sales.xlsx'
             )
         else:
-            print('Some error occured please try again...')
+            print('Some error occurred please try again...')
 
             mywb.close()
 
@@ -173,6 +176,6 @@ class FetchData:
         month = self._form.getfirst('month')
         year = self._form.getfirst('year')
 
-        self.create_workbook(month, year, sale_type, DATABASE_FILENAME)
+        FetchData.create_workbook(month, year, sale_type)
 
         return {'success': 'Please check the file location.'}

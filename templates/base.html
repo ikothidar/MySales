@@ -5,49 +5,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../static/css/index.css">
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../static/js/index.js"></script>
 </head>
 
 <body>
     <div class="header">
         <header>
-            <a href="/html" id='home-nav'>Dashboard</a>
+            <a href="./base.html" id='home-nav'>Dashboard</a>
         </header>
     </div>
 
     <div class="card-trip" id="fetch-data">
-        <img src="../data/images/fetch_data.png"  alt="loading..."/>
+        <img src="../static/images/fetch_data.png"  alt="loading..."/>
         <div class="card-trip-infos">
             <div>
                 <h2>Fetch Data</h2>
                 <p>Fetch Primary and Secondary sales data.</p>
             </div>
         </div>
-        <a href="./under_construction.html" class='card-link'></a>
+        <a href="./pages/fetch_report.html" class='card-link'></a>
     </div>
     <div class="card-trip" id="primary-sales">
-        <img src="../data/images/primary_sales.png"  alt="loading..."/>
+        <img src="../static/images/primary_sales.png"  alt="loading..."/>
         <div class="card-trip-infos">
             <div>
                 <h2>Primary Sales</h2>
                 <p>Insert Primary Sales Data.</p>
             </div>
         </div>
-        <a href="./primary_sales.html" class='card-link'></a>
+        <a href="./pages/primary_sales.html" class='card-link'></a>
     </div>
     <div class="card-trip" id="secondary-sales">
-        <img src="../data/images/secondary_sales.jpg"  alt="loading..."/>
+        <img src="../static/images/secondary_sales.jpg"  alt="loading..."/>
         <div class="card-trip-infos">
             <div>
                 <h2>Secondary Sales</h2>
                 <p>Insert Secondary Sales Data.</p>
             </div>
         </div>
-        <a href="./secondary_sales.html" class='card-link'></a>
+        <a href="./pages/secondary_sales.html" class='card-link'></a>
     </div>
 
 </body>

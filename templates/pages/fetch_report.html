@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fetch Report</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
     <div class="header">
         <header>
-            <a href="/html/" id='home-nav'>Dashboard</a>
+            <a href="../base.html" id='home-nav'>Dashboard</a>
         </header>
     </div>
 
@@ -21,14 +21,18 @@
             <h2>Fetch Report</h2>
             <input type="hidden" name="form_id" value="fetch">
 
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount">
+            <label for="sale_type">Sale Type:</label>
+            <select name="sale_type" id="sale_type">
+                <option value="both_sales">BOTH SALES</option>
+                <option value="primary">PRIMARY SALES</option>
+                <option value="secondary">SECONDARY SALES</option>
+            </select>
 
             <label for="month">Month:</label>
-            <input type="date" id="month" name="month" pattern="mm">
+            <input type="number" min="01" max="12" step="1" id="month" name="month" value="01" />
 
             <label for="year">Year:</label>
-            <input type="date" id="year" name="year" pattern="yyyy">
+            <input type="number" min="1900" max="2099" step="1" id="year" name="year" value="2024" />
 
             <button type="submit">Submit</button>
         </form>

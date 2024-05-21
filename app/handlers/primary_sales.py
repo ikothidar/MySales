@@ -2,7 +2,7 @@ from typing import Optional
 
 from cgi import FieldStorage
 from datetime import datetime
-from source.config.utils import DBTables, get_name_from_gst
+from app.config import DBTables, get_name_from_gst
 
 TABLE_NAME = DBTables.PRIMARY_SALES.name
 

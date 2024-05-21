@@ -3,13 +3,13 @@
 import cgi
 import cgitb
 
-from config.utils import DATABASE_FILENAME, DBTables, FormTypes
+from app.config import DATABASE_FILENAME, DBTables, FormTypes
 from handlers.fetch_data import FetchData
 from handlers.primary_sales import PrimarySales
 from handlers.secondary_sales import SecondarySales
 from handlers.sqlite import SQLite
 
-print("Content-type:text/html\n\n")
+print("Content-type:text/pages\n\n")
 cgitb.enable(display=0, logdir="./logs")
 
 
