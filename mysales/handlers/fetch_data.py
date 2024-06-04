@@ -2,7 +2,7 @@ from cgi import FieldStorage
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 
-from app.config import (
+from mysales.config import (
     DATABASE_FILENAME,
     DBTables,
     FetchTypes,

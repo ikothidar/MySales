@@ -56,6 +56,35 @@ SECONDARY_SALES_HEADER= (
     'Total GST',
 )
 
+PRIMARY_VALID_FIELDS = [
+    'entry_date',
+    'gst_number',
+    'party_name',
+    'invoice_number',
+    'invoice_date',
+    'goods_details',
+    'hsn_code',
+    'total_bill',
+    'amount',
+    'tax_amount',
+    'gst_percentage',
+]
+
+SECONDARY_VALID_FIELDS = [
+    'entry_date',
+    'gst_number',
+    'party_name',
+    'invoice_number',
+    'invoice_date',
+    'goods_details',
+    'amount',
+    'total_bill',
+    'gst_percentage',
+    'tax_amount',
+    'cgst',
+    'sgst',
+]
+
 
 class DBTables(Enum):
     PRIMARY_SALES = 'primary'

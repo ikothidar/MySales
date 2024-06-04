@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mysales"
-version = "1.0"
+version = "1.1"
 description = "Insert Primary and Secondary sales data and also fetch sales data month wise."
 authors = ["IshaanK <kothidarishaan11@gmail.com>"]
 readme = "README.md"
@@ -9,6 +9,22 @@ readme = "README.md"
 python = "^3.11"
 openpyxl = "^3.1.2"
 et-xmlfile = "^1.1.0"
+flask = "^3.0.3"
+setuptools = "^70.0.0"
+python-dotenv = "^1.0.1"
+flask-cors = "^4.0.1"
+flask-login = "^0.6.3"
+flask-bcrypt = "^1.0.1"
+flask-limiter = "^3.7.0"
+flask-caching = "^2.3.0"
+flask-sqlalchemy = "^3.1.1"
+black = "^24.4.2"
+pydantic = "^2.7.1"
+gunicorn = "^22.0.0"
+email-validator = "^2.1.1"
+werkzeug = "^3.0.3"
+flask-wtf = "^1.2.1"
+pandas = "^2.2.2"
 
 
 [build-system]

@@ -1,65 +1,70 @@
-<!DOCTYPE html>
-<html lang="en-IN">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+Secondary Sales
+{% endblock title %}
 
-    <title>Secondary Sales</title>
+{% block extrajs %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+{% endblock extrajs %}
 
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+{% block content %}
+<!--<div class="header">-->
+<!--    <header>-->
+<!--        <a href="/" id='home-nav'>Dashboard</a>-->
+<!--    </header>-->
+<!--</div>-->
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-    <script type="text/javascript" src="../../static/js/script.js"></script>
-</head>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" class="bg-light p-4 border rounded">
+                {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+                {% if errors %}
+                <div class="alert alert-danger">
+                    {{ errors[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
 
-<body>
-    <div class="header">
-        <header>
-            <a href="../base.html" id='home-nav'>Dashboard</a>
-        </header>
+                {{ form.hidden_tag() }}
+                {{ csrf_token() }}
+
+                <label for="has_gst">Do you have a GST Number?</label>
+                {{ form.has_gst }}
+
+                <div class="form-group" id="gst_number">
+                    {{ form.gst_number.label(class="form-control-label") }}
+                    {{ form.gst_number(class="form-control") }}
+                </div>
+                <div class="form-group" id="party_name">
+                    {{ form.party_name.label(class="form-control-label") }}
+                    {{ form.party_name(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.invoice_number.label(class="form-control-label") }}
+                    {{ form.invoice_number(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.invoice_date.label(class="form-control-label") }}
+                    {{ form.invoice_date(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.goods_details.label(class="form-control-label") }}
+                    {{ form.goods_details(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.amount.label(class="form-control-label") }}
+                    {{ form.amount(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.gst_percentage.label(class="form-control-label") }}
+                    {{ form.gst_percentage(class="form-control") }}
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-
-    <div class="container">
-        <form action="../source/cgi_script.py" method="post">
-            <h2>Secondary Sales Form</h2>
-            <input type="hidden" name="form_id" value="secondary">
-
-            <label for="toggle_button">GST Number (Yes/No):</label>
-            <label class="switch">
-                <input id="toggle_button" type="checkbox" checked>
-                <span class="slider round"></span>
-            </label>
-
-            <div id="gst_number_container">
-                <label for="gst_number">GST Number:</label>
-                <input type="text" id="gst_number" name="gst_number">
-            </div>
-
-            <div id="name_container">
-                <label for="party_name">Party Name:</label>
-                <input type="text" id="party_name" name="party_name">
-            </div>
-
-            <label for="invoice_number">Invoice Number:</label>
-            <input type="text" id="invoice_number" name="invoice_number">
-
-            <label for="invoice_date">Invoice Date:</label>
-            <input type="date" id="invoice_date" name="invoice_date" pattern="yyyy-mm-dd">
-
-            <label for="goods_details">Goods Details:</label>
-            <textarea id="goods_details" name="goods_details"></textarea>
-
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount">
-
-            <label for="gst_percentage">GST%:</label>
-            <input type="number" id="gst_percentage" name="gst_percentage">
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</body>
-
-</html>
+</div>
+{% endblock content %}

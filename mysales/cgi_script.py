@@ -3,7 +3,7 @@
 import cgi
 import cgitb
 
-from app.config import DATABASE_FILENAME, DBTables, FormTypes
+from mysales.config.const import DATABASE_FILENAME, DBTables, FormTypes
 from handlers.fetch_data import FetchData
 from handlers.primary_sales import PrimarySales
 from handlers.secondary_sales import SecondarySales

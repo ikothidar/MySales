@@ -1,7 +1,7 @@
 $(document).ready(function () {
-  const toggleButton = document.getElementById('toggle_button');
-  const gstNumberContainer = document.getElementById('gst_number_container');
-  const nameContainer = document.getElementById('name_container');
+  const toggleButton = document.getElementById('has_gst');
+  const gstNumberContainer = document.getElementById('gst_number');
+  const nameContainer = document.getElementById('party_name');
 
   function gstContianerVisiblity() {
     if (toggleButton.checked) {

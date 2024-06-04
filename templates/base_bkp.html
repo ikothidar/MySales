@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
+
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/images/favicon.ico"/>
     <!-- CSS -->
+    {% block css %}
     <link rel="stylesheet" href="/css/main.css"/>
+    {% endblock css %}
     <!-- JAVASCRIPT -->
-    <script src="/js/main.js" defer></script>
+    {% block js %}
+    {% endblock js %}
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>{% block title %}{% endblock title %}</title>
-    {% block extrajs %}
-    {% endblock extrajs %}
 </head>
+
+{% block body %}
 <body class="bg-gray-100 dark:text-white dark:bg-gray-800">
 
 {% with messages = get_flashed_messages(with_categories=true, category_filter=["success", "info"]) %}
@@ -36,4 +41,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+{% endblock body %}
 </html>
