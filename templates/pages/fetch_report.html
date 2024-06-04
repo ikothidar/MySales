@@ -31,14 +31,16 @@ Fetch Report
                     {{ form.fetch_type(class="form-control") }}
                 </div>
                 <div class="form-group">
-                    {{ form.month.label(class="form-control-label") }}
-                    {{ form.month(size=2, class="form-control") }}
+                    {{ form.start_date.label(class="form-control-label") }}
+                    {{ form.start_date(size=2, class="form-control") }}
                 </div>
                 <div class="form-group">
-                    {{ form.year.label(class="form-control-label") }}
-                    {{ form.year(size=4, class="form-control") }}
+                    {{ form.end_date.label(class="form-control-label") }}
+                    {{ form.end_date(size=4, class="form-control") }}
                 </div>
-                <button type="submit">Submit</button>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-block") }}
+                </div>
             </form>
         </div>
     </div>

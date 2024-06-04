@@ -48,13 +48,7 @@ class SecondarySalesForm(FlaskForm):
 
 class FetchReportForm(FlaskForm):
     fetch_type = SelectField('Report Fetch Type: ', choices=FETCH_OPTIONS)
-    month = IntegerField(
-        "Report Month: ",
-        validators=[DataRequired(), NumberRange(min=1, max=12)]
-    )
-    year = IntegerField(
-        "Report Year: ",
-        validators=[DataRequired(), NumberRange(min=1900, max=2050)],
-    )
+    start_date = DateField("Report Month: ", validators=[DataRequired()])
+    end_date = DateField("Report Year: ", validators=[DataRequired()])
 
     submit = SubmitField("Submit")

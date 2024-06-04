@@ -2,8 +2,6 @@
 import json
 import uuid
 
-# Local Modules
-from mysales.extensions import db
 
 class SerializableClass:
     def to_json(self):

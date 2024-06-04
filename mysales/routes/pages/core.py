@@ -11,6 +11,7 @@ from mysales.forms.forms import (
     PrimarySalesForm,
     SecondarySalesForm,
 )
+from mysales.utils.fetch_data import FetchData
 from mysales.utils.models import get_name_by_gst
 
 core_bp = Blueprint("core", __name__, url_prefix="/sales")
@@ -22,7 +23,14 @@ def fetch_report_route():
     form = FetchReportForm()
 
     if form.validate_on_submit():
-        return {"Month": form.month.data, "Year": form.year.data}
+        form_data = form.data
+        fetch_obj = FetchData(
+            fetch_type=form_data['fetch_type'],
+            start_date=form_data['start_date'],
+            end_date=form_data['end_date']
+        )
+
+        fetch_obj.create_workbook()
 
     return render_template("pages/fetch_report.html", form=form)
 

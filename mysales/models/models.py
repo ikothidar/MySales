@@ -63,7 +63,11 @@ class SecondarySales(db.Model):
     )
     goods_details = db.Column(db.Text, nullable=False)
     amount = db.Column(db.Float, nullable=False)
+    total_bill = db.Column(db.Integer, nullable=False)
     gst_percentage = db.Column(db.Integer, nullable=False)
+    tax_amount = db.Column(db.Float, nullable=False)
+    cgst = db.Column(db.Float, nullable=False)
+    sgst = db.Column(db.Float, nullable=False)
 
     __table_args__ = (
         db.PrimaryKeyConstraint(
