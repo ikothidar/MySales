@@ -57,9 +57,6 @@ class FetchData:
             total = 0
             for row in range(4, max_row):
                 # cell_name = '{0}{1}'.format(col, row)
-                print(f"current row: {row}")
-                print(f"current col: {col}")
-                print(f"value is: {sheet.cell(row=row, column=col).value}")
                 total += sheet.cell(row=row, column=col).value
 
             sheet.cell(column=col, row=max_row).value = total
@@ -158,14 +155,14 @@ class FetchData:
         sheet = my_workbook.active
         sheet.title = FetchTypes.PRIMARY_SALES.value
         self.primary_sale(sheet)
-        FetchData.sum_amount(sheet, 8)
+        FetchData.sum_amount(sheet, 9)
         FetchData.change_width(sheet)
         FetchData.style_header(sheet[3])
 
         # Create Secondary Sales sheet
         sheet = my_workbook.create_sheet(FetchTypes.SECONDARY_SALES.value)
         self.secondary_sale(sheet)
-        FetchData.sum_amount(sheet, 7)
+        FetchData.sum_amount(sheet, 9)
         FetchData.change_width(sheet)
         FetchData.style_header(sheet[3])
 
@@ -186,12 +183,3 @@ class FetchData:
                 'spreadsheetml.sheet'
             ),
         )
-
-
-
-        # my_workbook.save(
-        #     f'{TARGET_LOCATION}{self.start_date}_{self.end_date}'
-        #     '_Purchases_and_Sales.xlsx'
-        # )
-
-        my_workbook.close()
