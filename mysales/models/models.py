@@ -31,9 +31,11 @@ class PrimarySales(db.Model):
     goods_details = db.Column(db.Text, nullable=False)
     hsn_code = db.Column(db.String, nullable=False)
     total_bill = db.Column(db.Integer, nullable=False)
-    amount = db.Column(db.Float, nullable=False)
-    tax_amount = db.Column(db.Float, nullable=False)
+    taxable_value = db.Column(db.Float, nullable=False)
     gst_percentage = db.Column(db.Integer, nullable=False)
+    igst = db.Column(db.Float, nullable=False, default=0)
+    cgst = db.Column(db.Float, nullable=False, default=0)
+    sgst = db.Column(db.Float, nullable=False, default=0)
 
     __table_args__ = (
         db.PrimaryKeyConstraint(
@@ -62,8 +64,9 @@ class SecondarySales(db.Model):
         nullable=False
     )
     goods_details = db.Column(db.Text, nullable=False)
-    amount = db.Column(db.Float, nullable=False)
+    taxable_value = db.Column(db.Float, nullable=False)
     total_bill = db.Column(db.Integer, nullable=False)
+    product_type = db.Column(db.String, nullable=False)
     gst_percentage = db.Column(db.Integer, nullable=False)
     tax_amount = db.Column(db.Float, nullable=False)
     cgst = db.Column(db.Float, nullable=False)

@@ -47,8 +47,12 @@ Primary Sales
                     {{ form.hsn_code(class="form-control") }}
                 </div>
                 <div class="form-group">
-                    {{ form.amount.label(class="form-control-label") }}
-                    {{ form.amount(class="form-control") }}
+                    {{ form.taxable_value.label(class="form-control-label") }}
+                    {{ form.taxable_value(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.gst_applicability.label(class="form-control-label") }}
+                    {{ form.gst_applicability(class="form-control") }}
                 </div>
                 <div class="form-group">
                     {{ form.gst_percentage.label(class="form-control-label") }}

@@ -1,5 +1,5 @@
 # Flask modules
-from flask import Blueprint, render_template
+from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import login_required
 
 # Local Modules
@@ -25,12 +25,11 @@ def fetch_report_route():
     if form.validate_on_submit():
         form_data = form.data
         fetch_obj = FetchData(
-            fetch_type=form_data['fetch_type'],
             start_date=form_data['start_date'],
             end_date=form_data['end_date']
         )
 
-        fetch_obj.create_workbook()
+        return fetch_obj.create_workbook()
 
     return render_template("pages/fetch_report.html", form=form)
 
@@ -52,21 +51,36 @@ def primary_sales_route():
             form_data['gst_number'] = 'CASH INVOICE'
 
         tax_amount = round(
-            int(form_data['amount']) * int(form_data['gst_percentage']) / 100, 2
+            int(form_data['taxable_value']) *
+            int(form_data['gst_percentage']) / 100, 2
         )
-        form_data['tax_amount'] = tax_amount
         form_data['total_bill'] = (
-            int(form_data['amount']) + round(tax_amount + 0.01, 0)
+            int(form_data['taxable_value']) + round(tax_amount + 0.01, 0)
         )
+
+        if form_data['gst_applicability'] == 'IntraState':
+            form_data['igst'] = tax_amount
+        elif form_data['gst_applicability'] == 'InterState':
+            form_data['cgst'] = tax_amount / 2
+            form_data['sgst'] = tax_amount / 2
 
         for field_name, field_value in form_data.items():
             if field_name in PRIMARY_VALID_FIELDS:
                 setattr(primary_obj, field_name, field_value)
 
-        db.session.add(primary_obj)
-        db.session.commit()
+        try:
+            db.session.add(primary_obj)
+            db.session.commit()
 
-        return 'Data Stored successfully!'
+            flash(
+                f"Data Stored successfully for {primary_obj.invoice_number}",
+                "success"
+            )
+        except Exception as ex:
+            flash(
+                f"Failed to save invoice: {primary_obj.invoice_number}",
+                "error"
+            )
 
     return render_template("pages/primary_sales.html", form=form)
 
@@ -88,22 +102,32 @@ def secondary_sales_route():
             form_data['gst_number'] = 'CASH INVOICE'
 
         tax_amount = round(
-            int(form_data['amount']) * int(form_data['gst_percentage']) / 100, 2
+            int(form_data['taxable_value']) *
+            int(form_data['gst_percentage']) / 100, 2
         )
         form_data['tax_amount'] = tax_amount
         form_data['cgst'] = tax_amount / 2
         form_data['sgst'] = tax_amount / 2
         form_data['total_bill'] = (
-            int(form_data['amount']) + round(tax_amount + 0.01, 0)
+            int(form_data['taxable_value']) + round(tax_amount + 0.01, 0)
         )
 
         for field_name, field_value in form_data.items():
             if field_name in SECONDARY_VALID_FIELDS:
                 setattr(secondary_obj, field_name, field_value)
 
-        db.session.add(secondary_obj)
-        db.session.commit()
+        try:
+            db.session.add(secondary_obj)
+            db.session.commit()
 
-        return 'Data Stored successfully!'
+            flash(
+                f"Data Stored successfully for {secondary_obj.invoice_number}",
+                "success"
+            )
+        except Exception as ex:
+            flash(
+                f"Failed to save invoice: {secondary_obj.invoice_number}",
+                "error"
+            )
 
     return render_template("pages/secondary_sales.html", form=form)

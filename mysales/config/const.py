@@ -1,42 +1,41 @@
 from enum import Enum
-from typing import Optional
 
-TARGET_LOCATION = r"C:/Users/6129158/Projects/PA/MySales/data/files/"
+TARGET_LOCATION = r'C:/Users/6129158/Projects/PA/MySales/data/files/'
 
-SALE_TYPE = ['Primary', 'Secondary']
-
+# Report file valid Headers
 PRIMARY_SALES_HEADER = (
-    'Date', 
+    'Entry Date',
     'Name of the party', 
     'GST no of party', 
     'Invoice No', 
-    'Date', 
-    'Details of Goods', 
+    'Invoice Date',
+    'Details of Goods',
     'HSN code',
+    'GST Percentage',
     'Total amount of bill', 
-    'Taxable amount before GST', 
-    'IGST @12%', 
-    'IGST @5%', 
-    'CGST @6% and 2.5%',
-    'SGST @6% and 2.5%',
+    'Taxable amount before GST',
+    'IGST',
+    'CGST',
+    'SGST',
 )
 
 SECONDARY_SALES_HEADER = (
-    'Date', 
+    'Entry Date',
     'Name of the party', 
     'GST no of party', 
     'Invoice No', 
-    'Date', 
+    'Invoice Date',
     'Details of Goods',
-    'Total Amount of Bill', 
-    'Taxable Value @12% Ayurvedic Medicine',
-    'Taxable Value @12% Compression Germents', 
-    'Taxable Value @5% Abd.Belts', 
+    'Type of Product',
+    'GST Percentage',
+    'Total Amount of Bill',
+    'Taxable Value ',
     'CGST', 
     'SGST',
     'Total GST',
 )
 
+# Valid fields for Table
 PRIMARY_VALID_FIELDS = [
     'entry_date',
     'gst_number',
@@ -45,10 +44,12 @@ PRIMARY_VALID_FIELDS = [
     'invoice_date',
     'goods_details',
     'hsn_code',
-    'total_bill',
-    'amount',
-    'tax_amount',
     'gst_percentage',
+    'total_bill',
+    'taxable_value',
+    'igst',
+    'cgst',
+    'sgst',
 ]
 
 SECONDARY_VALID_FIELDS = [
@@ -58,22 +59,27 @@ SECONDARY_VALID_FIELDS = [
     'invoice_number',
     'invoice_date',
     'goods_details',
-    'amount',
-    'total_bill',
     'gst_percentage',
+    'taxable_value',
+    'total_bill',
+    'product_type',
     'tax_amount',
     'cgst',
     'sgst',
 ]
 
+# Form drop down options
+GST_APPLICABILITY = [
+    'InterState', 'IntraState',
+]
 
-class FormTypes(Enum):
-    PRIMARY_SALES = 'primary'
-    SECONDARY_SALES = 'secondary'
-    FETCH_REPORT = 'fetch'
+PRODUCT_TYPES = [
+    ('Ayurvedic Medicine', 'Ayurvedic Medicine'),
+    ('Compression Garments', 'Compression Garments'),
+    ('Abdominal Belts', 'Abdominal Belts'),
+]
 
 
 class FetchTypes(Enum):
-    PRIMARY_SALES = 'primary'
-    SECONDARY_SALES = 'secondary'
-    BOTH_SALES = 'both_sales'
+    PRIMARY_SALES = 'Primary'
+    SECONDARY_SALES = 'Secondary'
