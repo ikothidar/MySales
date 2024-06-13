@@ -4,7 +4,11 @@ from mysales import create_app
 # from mysales.extensions import db
 # from mysales.models.models import GSTDetails
 
-app = create_app(debug=True)
+# Dev Environment
+# app = create_app(debug=True)
+
+# Prod Environment
+app = create_app()
 
 
 # def populate_gst_data():
