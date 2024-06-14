@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 5000
 
 # Run the application using gunicorn as the server
-CMD ["poetry", "run", "python", "server.py"]
+CMD ["poetry", "run", "gunicorn", "server:app"]
