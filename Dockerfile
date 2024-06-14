@@ -2,7 +2,7 @@
 FROM python:3.11-slim-buster
 
 # Set the working directory
-WORKDIR /mysales
+WORKDIR .
 
 # Copy the poetry dependency file
 COPY pyproject.toml ./
@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 5000
 
 # Run the application using gunicorn as the server
-CMD ["python", "server.py"]
+CMD ["poetry", "run", "gunicorn", "server:app"]
