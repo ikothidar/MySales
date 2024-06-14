@@ -7,6 +7,9 @@ WORKDIR /mysales
 # Copy the poetry dependency file
 COPY pyproject.toml ./
 
+# Install poetry using pip
+RUN pip install poetry
+
 # Install poetry packages
 RUN poetry install --no-interaction --no-cache
 
