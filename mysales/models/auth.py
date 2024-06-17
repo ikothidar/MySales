@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     )
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    password = db.Column(db.LargeBinary, nullable=False)
     created_date = db.Column(db.DateTime, default=datetime.utcnow())
 
     def __repr__(self):
