@@ -1,9 +1,6 @@
 # Base image for Python Flask
 FROM python:3.11-slim-buster
 
-# Set the working directory
-WORKDIR .
-
 # Copy the poetry dependency file
 COPY pyproject.toml ./
 
@@ -16,7 +13,10 @@ RUN poetry install --no-interaction --no-cache
 # Copy the Flask app file
 COPY . .
 
-EXPOSE 5000
+# Set the working directory
+WORKDIR .
+
+EXPOSE 8080
 
 # Run the application using gunicorn as the server
-CMD ["poetry", "run", "gunicorn", "server:app"]
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:8080", "server:app"]
