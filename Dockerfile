@@ -19,4 +19,4 @@ WORKDIR .
 EXPOSE 8080
 
 # Run the application using gunicorn as the server
-CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:8080", "server:app"]
+CMD ["poetry", "run", "gunicorn", "server:app"]
