@@ -26,11 +26,21 @@
 {% endif %}
 {% endwith %}
 
-<div class="header">
-    <header>
-        <a href="/" id='home-nav'>Dashboard</a>
-    </header>
+{% block navbar %}
+<div class="topnav">
+    <a href="/">Dashboard</a>
+
+    <div class="topnav-right">
+        {% if session.logged_in %}
+            <a href="#" style="pointer-events: none;">{{ session.username }}</a>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">Login</a>
+            <a href="{{ url_for('auth.register') }}">Sign up</a>
+        {% endif %}
+    </div>
 </div>
+{% endblock navbar %}
 
 <main class="p-2">
     {% block content %}

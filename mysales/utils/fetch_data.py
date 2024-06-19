@@ -11,7 +11,7 @@ from mysales.config.const import (
     PRIMARY_SALES_HEADER,
     SECONDARY_SALES_HEADER,
 )
-from mysales.utils.utils import convert_list_to_strings, format_date
+from mysales.utils.utils import format_date
 
 
 class FetchData:
@@ -72,7 +72,9 @@ class FetchData:
 
     def primary_sale(self, sheet):
         sheet['D1'] = (
-            f'Details of Purchase from "{self.start_date}" to "{self.end_date}"'
+            'Details of Purchase '
+            f'from "{format_date(self.start_date, "%d-%B-%Y")}" '
+            f'to "{format_date(self.end_date, "%d-%B-%Y")}"'
         )
         sheet['D1'].font = Font(color="00B050", bold=True, size=18)
         sheet.merge_cells('D1:J1')
@@ -111,7 +113,9 @@ class FetchData:
 
     def secondary_sale(self, sheet):
         sheet['D1'] = (
-            f'Details of Sales from "{self.start_date}" to "{self.end_date}"'
+            'Details of Sales '
+            f'from "{format_date(self.start_date, "%d-%B-%Y")}" '
+            f'to "{format_date(self.end_date, "%d-%B-%Y")}"'
         )
         sheet['D1'].font = Font(color="00B050", bold=True, size=18)
         sheet.merge_cells('D1:J1')
@@ -175,7 +179,10 @@ class FetchData:
         return send_file(
             output,
             download_name=(
-                f'{self.start_date}_{self.end_date}_Purchases_and_Sales.xlsx'
+                f'{format_date(self.start_date, "%Y_%B_%d")}'
+                '_to_'
+                f'{format_date(self.end_date, "%Y_%B_%d")}'
+                '_Purchases_and_Sales.xlsx'
             ),
             as_attachment=True,
             mimetype=(

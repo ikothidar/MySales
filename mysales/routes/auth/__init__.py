@@ -1,5 +1,5 @@
 # Flask modules
-from flask import Blueprint, redirect, url_for, flash, render_template
+from flask import Blueprint, redirect, url_for, flash, render_template, session
 from flask_login import login_required, current_user
 from flask_login import login_user, logout_user
 
@@ -28,6 +28,10 @@ def login():
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user, remember=remember_me)
             flash(f"Logged in successfully as {user.name}", "success")
+
+            session['logged_in'] = True
+            session['username'] = user.name
+
             return redirect(url_for("pages.index_route"))
         else:
             flash("Invalid email or password", "danger")
@@ -73,4 +77,5 @@ def register():
 @login_required
 def logout():
     logout_user()
+    session.clear()
     return redirect(url_for("auth.login"))
